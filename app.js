@@ -4,9 +4,8 @@
 		timerMin: null,
 		timerSec: null,
 		timer: null,
-		defaultTimer: 90,
 		intervalID: null,
-		id: null,
+		progressID: null,
 		
 		init: function(){
 			app.listeners();
@@ -18,26 +17,27 @@
 			$("#reset").on("click", app.reset);
 		},
 
-		time: function(){
+		inputValue: function(){
 			app.timerMin = $("#min").val();
 			app.timerSec = $("#sec").val();
+			app.timer = parseInt(app.timerMin, 10)*60 + parseInt(app.timerSec, 10);
 		},
 
 		start: function(){
-			app.time();
-			app.timer = parseInt(app.timerMin, 10)*60 + parseInt(app.timerSec, 10);
+			app.inputValue();
 			app.interval();
 		},
 
 		interval: function(){
+			app.timeRun = true;
 			app.intervalID = setInterval(app.decrement, 1000);
-			app.id = setInterval(app.progress, 1000);
+			app.progressID = setInterval(app.progress, 1000);
 		},
 
 		decrement: function(){
 			app.timer--;
 			
-			if(app.timer === 0){
+			if(app.timer <= 0){
 				app.stop();
 			}
 
@@ -47,27 +47,26 @@
 		updateView: function(){
 			var minutes = parseInt(app.timer/60, 10);
 			var secondes = parseInt(app.timer%60, 10);
-			$("h1").html(minutes + ":" + secondes);
+			$("span").html(minutes + ":" + secondes);
 		},
 
 		stop: function(){
+			app.timeRun = false;
 			clearInterval(app.intervalID);
-			clearInterval(app.id);
+			clearInterval(app.progressID);
 		},
 
 		pause: function(){
-			if(!app.timeRun){
+			if(app.timeRun){
 				app.stop();
 			} else{
 				app.interval();
 			}
-
-			app.timeRun = !app.timeRun;
 		},
 
 		reset: function(){
 			app.stop();
-			app.defaultTimer = app.start();
+			app.start();
 		},
 
 		progress: function(){
