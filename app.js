@@ -6,6 +6,7 @@
 		timer: null,
 		defaultTimer: 90,
 		intervalID: null,
+		id: null,
 		
 		init: function(){
 			app.listeners();
@@ -30,6 +31,7 @@
 
 		interval: function(){
 			app.intervalID = setInterval(app.decrement, 1000);
+			app.id = setInterval(app.progress, 1000);
 		},
 
 		decrement: function(){
@@ -50,6 +52,7 @@
 
 		stop: function(){
 			clearInterval(app.intervalID);
+			clearInterval(app.id);
 		},
 
 		pause: function(){
@@ -65,6 +68,19 @@
 		reset: function(){
 			app.stop();
 			app.defaultTimer = app.start();
+		},
+
+		progress: function(){
+			var largeur = $("#chargement").css("width");
+			var width = 100;
+			
+			if(width <= 0){
+				app.stop();
+			} else{
+				width--;
+				largeur = width - "%";
+			}
+
 		}
 	};
 

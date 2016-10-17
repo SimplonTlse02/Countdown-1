@@ -1,0 +1,17 @@
+body {
+	text-align: center;
+}
+
+#bordure {
+	margin-top: 50px;
+	border: solid black 3px;
+	background-color: grey;
+	height: 20px;
+	width: 100%;
+}
+
+#chargement {
+	background-color: green;
+	height: 100%;
+	width: 100%;
+}

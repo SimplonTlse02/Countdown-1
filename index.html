@@ -2,20 +2,27 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
 	<title>Countdown</title>
 </head>
 <body>
+	<h1>Countdown Project</h1>
+
 	<div>
 		<input type="text" id="min" placeholder="Minutes">
 		<input type="text" id="sec" placeholder="Secondes">
 	</div>
 
-	<h1>0:00</h1>
+	<h2>0:00</h2>
 	
 	<div>
 		<button id="start">Start</button>
 		<button id="pause">||</button>
 		<button id="reset">Reset</button>
+	</div>
+
+	<div id="bordure">
+		<div id="chargement">%</div>
 	</div>
 	
 	<script src="node_modules/jquery/dist/jquery.js"></script>
