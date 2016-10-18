@@ -7,30 +7,32 @@
 	<title>Countdown</title>
 </head>
 <body>
-	<h1>Countdown Project</h1>
+	<div class="container">
+		<h1>Countdown Project</h1>
 
-	<div class="ui input">
-		<input type="text" id="min" placeholder="Minutes">
-		<input type="text" id="sec" placeholder="Secondes">
-	</div>
+		<div class="ui input">
+			<input type="text" id="min" placeholder="Minutes">
+			<input type="text" id="sec" placeholder="Secondes">
+		</div>
 
-	<div id="compteur">0:00</div>
-	
-	<div id="boutton">
-		<button class="ui green icon button" id="start">
-			<i class="play icon"></i>
-		</button>
-		<button class="ui black icon button" id="pause">
-			<i class="pause icon"></i>
-		</button>
-		<button class="ui red icon button" id="reset">
-			<i class="stop icon"></i>
-		</button>
-	</div>
+		<div id="compteur">0:00</div>
+		
+		<div id="bouton">
+			<button class="ui green icon button" id="start">
+				<i class="play icon"></i>
+			</button>
+			<button class="ui black icon button" id="pause">
+				<i class="pause icon"></i>
+			</button>
+			<button class="ui red icon button" id="reset">
+				<i class="stop icon"></i>
+			</button>
+		</div>
 
-	<div class="ui green progress" id="bordure">
-		<div class="bar" id="chargement">
-			<div class="progress">100%</div>
+		<div class="ui green progress">
+			<div class="bar" id="bordure">
+				<div class="progress" id="chargement">100%</div>
+			</div>
 		</div>
 	</div>
 	

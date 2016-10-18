@@ -8,6 +8,7 @@
 		timerSec: null,
 		timerMax: null,
 		timer: null,
+		timerDefault: 10,
 		intervalID: null,
 		progressID: null,
 		
@@ -26,10 +27,15 @@
 			this.inputValue();
 			this.interval();
 		},
+		
+		stop: function(){
+			this.timeRun = false;
+			clearInterval(this.intervalID);
+		},
 
 		inputValue: function(){
-			this.timerMin = $("#min").val();
-			this.timerSec = $("#sec").val();
+			this.timerMin = $("#min").val() || 0;
+			this.timerSec = $("#sec").val() || this.timerDefault;
 			this.timer = parseInt(this.timerMin, 10)*60 + parseInt(this.timerSec, 10);
 			this.timerMax = this.timer;
 		},
@@ -40,12 +46,13 @@
 		},
 
 		decrement: function(){
+			this.timer--;
 			this.temps();
 			this.progress();
-			this.timer--;
-			if(this.timer < 0){
+			if(this.timer <= 0){
 				this.stop();
 				$("#chargement").text("0%");
+				$("#compteur").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/Wgwp0waFRxA?autoplay=1" frameborder="0" allowfullscreen></iframe>');
 			}
 		},
 
@@ -55,10 +62,6 @@
 			$("#compteur").html(minutes + ":" + secondes);
 		},
 
-		stop: function(){
-			this.timeRun = false;
-			clearInterval(this.intervalID);
-		},
 
 		pause: function(){
 			if(this.timeRun){
@@ -75,7 +78,7 @@
 
 		progress: function(){
 			var width = parseInt(this.timer*100/this.timerMax, 10);
-			$("#chargement").css("width", width + "%");
+			$("#bordure").css("width", width + "%");
 			$("#chargement").text(width + "%");
 		}
 	};
