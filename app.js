@@ -7,7 +7,6 @@
 		timerMin: null,
 		timerSec: null,
 		timerMax: null,
-		timerDefault: 180,
 		timer: null,
 		intervalID: null,
 		progressID: null,
@@ -41,15 +40,19 @@
 		},
 
 		decrement: function(){
-			var minutes = parseInt(this.timer/60, 10);
-			var secondes = parseInt(this.timer%60, 10);
-			$("#compteur").html(minutes + ":" + secondes);
+			this.temps();
 			this.progress();
 			this.timer--;
 			if(this.timer < 0){
 				this.stop();
 				$("#chargement").text("0%");
 			}
+		},
+
+		temps: function(){
+			var minutes = parseInt(this.timer/60, 10);
+			var secondes = parseInt(this.timer%60, 10);
+			$("#compteur").html(minutes + ":" + secondes);
 		},
 
 		stop: function(){
