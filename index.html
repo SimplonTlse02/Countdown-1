@@ -2,23 +2,30 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="Semantic-UI-CSS-master/semantic.css">
 	<link rel="stylesheet" href="style.css">
 	<title>Countdown</title>
 </head>
 <body>
 	<h1>Countdown Project</h1>
 
-	<div>
+	<div class="ui input">
 		<input type="text" id="min" placeholder="Minutes">
 		<input type="text" id="sec" placeholder="Secondes">
 	</div>
 
-	<span>0:00</span>
+	<div id="compteur">0:00</div>
 	
-	<div>
-		<button id="start">Start</button>
-		<button id="pause">||</button>
-		<button id="reset">Reset</button>
+	<div id="boutton">
+		<button class="ui green icon button" id="start">
+			<i class="play icon"></i>
+		</button>
+		<button class="ui black icon button" id="pause">
+			<i class="pause icon"></i>
+		</button>
+		<button class="ui red icon button" id="reset">
+			<i class="stop icon"></i>
+		</button>
 	</div>
 
 	<div id="bordure">

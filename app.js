@@ -1,4 +1,7 @@
+
 (function(){
+	"use strict";
+	
 	var app = {
 		timeRun: false,
 		timerMin: null,
@@ -8,78 +11,72 @@
 		progressID: null,
 		
 		init: function(){
-			app.listeners();
+			this.listeners();
 		},
 
 		listeners: function(){
-			$("#start").on("click", app.start);
-			$("#pause").on("click", app.pause);
-			$("#reset").on("click", app.reset);
+			$("#start").on("click", this.start.bind(this));
+			$("#pause").on("click", this.pause.bind(this));
+			$("#reset").on("click", this.reset.bind(this));
 		},
 
 		inputValue: function(){
-			app.timerMin = $("#min").val();
-			app.timerSec = $("#sec").val();
-			app.timer = parseInt(app.timerMin, 10)*60 + parseInt(app.timerSec, 10);
+			this.timerMin = $("#min").val();
+			this.timerSec = $("#sec").val();
+			this.timer = parseInt(this.timerMin, 10)*60 + parseInt(this.timerSec, 10);
 		},
 
 		start: function(){
-			app.inputValue();
-			app.interval();
+			this.stop();
+			this.inputValue();
+			this.interval();
 		},
 
 		interval: function(){
-			app.timeRun = true;
-			app.intervalID = setInterval(app.decrement, 1000);
-			app.progressID = setInterval(app.progress, 1000);
+			this.timeRun = true;
+			this.intervalID = setInterval(this.decrement.bind(this), 1000);
+			this.progressID = setInterval(this.progress.bind(this), 1000);
 		},
 
 		decrement: function(){
-			app.timer--;
-			
-			if(app.timer <= 0){
-				app.stop();
+			var minutes = parseInt(this.timer/60, 10);
+			var secondes = parseInt(this.timer%60, 10);
+			$("#compteur").html(minutes + ":" + secondes);
+			this.timer--;
+			if(this.timer <= 0){
+				this.stop();
 			}
-
-			app.updateView();
-		},
-
-		updateView: function(){
-			var minutes = parseInt(app.timer/60, 10);
-			var secondes = parseInt(app.timer%60, 10);
-			$("span").html(minutes + ":" + secondes);
 		},
 
 		stop: function(){
-			app.timeRun = false;
-			clearInterval(app.intervalID);
-			clearInterval(app.progressID);
+			this.timeRun = false;
+			clearInterval(this.intervalID);
+			clearInterval(this.progressID);
 		},
 
 		pause: function(){
-			if(app.timeRun){
-				app.stop();
+			if(this.timeRun){
+				this.stop();
 			} else{
-				app.interval();
+				this.interval();
 			}
 		},
 
 		reset: function(){
-			app.stop();
-			app.start();
+			this.stop();
+			this.start();
 		},
 
 		progress: function(){
-			var largeur = $("#chargement").css("width");
+			var largeur = $("#chargement").css("width", "100%");
 			var width = 100;
 			
 			if(width <= 0){
-				app.stop();
+				this.stop();
 			} else{
 				width--;
-				largeur = width - "%";
+				largeur = (1 - largeur)/1 * width;
 			}
-
 		}
 	};
 
