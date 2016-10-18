@@ -14,13 +14,9 @@ body {
 
 #bordure {
 	margin: 0 auto;
-	background-color: grey;
-	height: 30px;
 	width: 500px;
 }
 
 #chargement {
-	background-color: green;
-	height: 100%;
 	width: 100%;
 }

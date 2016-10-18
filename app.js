@@ -6,8 +6,9 @@
 		timeRun: false,
 		timerMin: null,
 		timerSec: null,
-		timer: null,
 		timerMax: null,
+		timerDefault: 180,
+		timer: null,
 		intervalID: null,
 		progressID: null,
 		
@@ -21,17 +22,17 @@
 			$("#reset").on("click", this.reset.bind(this));
 		},
 
+		start: function(){
+			this.stop();
+			this.inputValue();
+			this.interval();
+		},
+
 		inputValue: function(){
 			this.timerMin = $("#min").val();
 			this.timerSec = $("#sec").val();
 			this.timer = parseInt(this.timerMin, 10)*60 + parseInt(this.timerSec, 10);
 			this.timerMax = this.timer;
-		},
-
-		start: function(){
-			this.stop();
-			this.inputValue();
-			this.interval();
 		},
 
 		interval: function(){
@@ -43,10 +44,11 @@
 			var minutes = parseInt(this.timer/60, 10);
 			var secondes = parseInt(this.timer%60, 10);
 			$("#compteur").html(minutes + ":" + secondes);
-			this.timer--;
 			this.progress();
+			this.timer--;
 			if(this.timer < 0){
 				this.stop();
+				$("#chargement").text("0%");
 			}
 		},
 
@@ -70,7 +72,6 @@
 
 		progress: function(){
 			var width = parseInt(this.timer*100/this.timerMax, 10);
-			console.log(width);
 			$("#chargement").css("width", width + "%");
 			$("#chargement").text(width + "%");
 		}
