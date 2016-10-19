@@ -8,7 +8,7 @@
 		timerSec: null,
 		timerMax: null,
 		timer: null,
-		timerDefault: 10,
+		timerDefault: 10, // Quelles unités ? Secondes ? Minutes ? Milliseconds 
 		intervalID: null,
 		progressID: null,
 		
